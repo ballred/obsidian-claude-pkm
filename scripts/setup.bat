@@ -185,17 +185,19 @@ echo.
 echo What's your main focus right now?
 set /p FOCUS="Current focus: "
 
-REM Create first daily note
-for /f "tokens=1-3 delims=/ " %%a in ('date /t') do (
-    set TODAY=%%c-%%a-%%b
-)
-set TODAY=%TODAY: =%
+REM Create first daily note (locale-agnostic date via PowerShell)
+for /f %%I in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set TODAY=%%I
 set DAILY_NOTE=%VAULT_PATH%\Daily Notes\%TODAY%.md
 
 if not exist "%DAILY_NOTE%" (
     echo Creating your first daily note...
     copy "%VAULT_PATH%\Templates\Daily Template.md" "%DAILY_NOTE%" >nul
     echo [OK] First daily note created: %TODAY%.md
+)
+
+REM Inject focus into Today's Priority if provided
+if not "%FOCUS%"=="" (
+    powershell -NoProfile -Command "(Get-Content -Raw '%DAILY_NOTE%') -replace '\\*\\*Today''s Priority:\\*\\*','**Today''s Priority:** %FOCUS%' | Set-Content -Encoding UTF8 '%DAILY_NOTE%'"
 )
 
 echo.
@@ -235,12 +237,17 @@ echo Read the documentation in docs\ for detailed guidance
 echo.
 
 REM Offer to open Obsidian
-if exist "%LOCALAPPDATA%\Obsidian\Obsidian.exe" (
-    set /p OPEN_OBSIDIAN="Open Obsidian now? (y/n): "
-    if /i "!OPEN_OBSIDIAN!"=="y" (
+set /p OPEN_OBSIDIAN="Open Obsidian now? (y/n): "
+if /i "!OPEN_OBSIDIAN!"=="y" (
+    REM Try common install locations, then PATH
+    if exist "%LOCALAPPDATA%\Programs\Obsidian\Obsidian.exe" (
+        start "" "%LOCALAPPDATA%\Programs\Obsidian\Obsidian.exe"
+    ) else if exist "%LOCALAPPDATA%\Obsidian\Obsidian.exe" (
         start "" "%LOCALAPPDATA%\Obsidian\Obsidian.exe"
-        echo [OK] Obsidian launched
+    ) else (
+        where obsidian >nul 2>nul && start "" obsidian
     )
+    echo [OK] Obsidian launched
 )
 
 echo.

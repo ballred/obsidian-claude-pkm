@@ -12,7 +12,7 @@ Common issues and their solutions. If you can't find your issue here, check the 
 
 2. **Check File Permissions**
    ```bash
-   ls -la ~/YourVault
+   ls -la ~/Documents/ObsidianPKM
    # Should show your user as owner
    ```
 
@@ -38,7 +38,7 @@ Common issues and their solutions. If you can't find your issue here, check the 
 **Solutions**:
 1. Check folder exists:
    ```bash
-   cd ~/Documents/YourVault
+   cd ~/Documents/ObsidianPKM
    ls -la
    ```
 
@@ -371,8 +371,8 @@ git config --global core.autocrlf true
 #### Permission Denied
 ```bash
 # Fix permissions
-chmod -R 755 ~/YourVault
-chown -R $USER:$USER ~/YourVault
+chmod -R 755 ~/Documents/ObsidianPKM
+chown -R $USER:$USER ~/Documents/ObsidianPKM
 ```
 
 #### Missing Dependencies
@@ -410,14 +410,14 @@ git checkout COMMIT_HASH -- path/to/file.md
 If vault is corrupted:
 ```bash
 # 1. Backup current vault
-cp -r ~/YourVault ~/YourVault.backup
+cp -r ~/Documents/ObsidianPKM ~/Documents/ObsidianPKM.backup
 
 # 2. Create fresh vault
 cp -r vault-template ~/NewVault
 
 # 3. Copy your notes
-cp -r ~/YourVault.backup/Daily\ Notes/* ~/NewVault/Daily\ Notes/
-cp -r ~/YourVault.backup/Projects/* ~/NewVault/Projects/
+cp -r ~/Documents/ObsidianPKM.backup/Daily\ Notes/* ~/NewVault/Daily\ Notes/
+cp -r ~/Documents/ObsidianPKM.backup/Projects/* ~/NewVault/Projects/
 
 # 4. Reinitialize Git
 cd ~/NewVault
@@ -477,7 +477,7 @@ rm -rf node_modules .obsidian/cache
 ### Resources
 - [Obsidian Forum](https://forum.obsidian.md/)
 - [Claude Code Docs](https://docs.anthropic.com/en/docs/claude-code)
-- [GitHub Issues](https://github.com/yourusername/obsidian-claude-pkm/issues)
+- [GitHub Issues](https://github.com/ballred/obsidian-claude-pkm/issues)
 
 ### Debug Information
 When asking for help, provide:
@@ -496,7 +496,7 @@ git status
 git remote -v
 
 # Vault structure
-ls -la ~/YourVault
+ls -la ~/Documents/ObsidianPKM
 ```
 
 ### Community Support

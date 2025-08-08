@@ -1,6 +1,6 @@
 # Obsidian + Claude Code PKM Starter Kit 🚀
 
-A complete personal knowledge management system that combines Obsidian's powerful note-taking with Claude Code's AI assistance. Go from zero to a fully functional PKM in under 30 minutes.
+A complete personal knowledge management system that combines Obsidian's powerful note-taking with Claude Code's AI assistance. Go from zero to a fully functional PKM in 15 minutes or less.
 
 ## ✨ Features
 
@@ -20,23 +20,35 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 - Git installed
 - GitHub account (optional, for mobile sync)
 
-### Setup (5 minutes)
+### 15-Minute Quickstart
 ```bash
-# Clone this repository
-git clone https://github.com/yourusername/obsidian-claude-pkm.git
+# 1) Install prerequisites (once)
+# - Obsidian: https://obsidian.md/
+# - Git: https://git-scm.com/
+# - Claude Code CLI: https://docs.anthropic.com/en/docs/claude-code
+
+# 2) Clone this repository
+git clone https://github.com/ballred/obsidian-claude-pkm.git
 cd obsidian-claude-pkm
 
-# Run the setup script
+# 3) Run setup (macOS/Linux)
+chmod +x scripts/setup.sh
 ./scripts/setup.sh
 
-# Or manually copy the vault template
-cp -r vault-template ~/Documents/MyVault
+# 3b) Windows
+scripts\setup.bat
+```
+
+### Manual Copy (alternative)
+```bash
+# Copy the vault template to your preferred location
+cp -r vault-template ~/Documents/ObsidianPKM
 ```
 
 ### Open in Obsidian
 1. Launch Obsidian
 2. Click "Open folder as vault"
-3. Select your vault folder
+3. Select your vault folder (e.g., ~/Documents/ObsidianPKM)
 4. Start with today's daily note!
 
 ## 📖 Documentation

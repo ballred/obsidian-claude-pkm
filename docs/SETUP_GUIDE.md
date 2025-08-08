@@ -1,6 +1,6 @@
 # Complete Setup Guide
 
-This guide will walk you through setting up your Obsidian + Claude Code PKM system step by step. Total time: ~30 minutes.
+This guide will walk you through setting up your Obsidian + Claude Code PKM system step by step. Total time: ~15 minutes if prerequisites are installed.
 
 ## Prerequisites Checklist
 
@@ -29,7 +29,7 @@ claude --version
 
 ```bash
 # Option A: If you have git
-git clone https://github.com/yourusername/obsidian-claude-pkm.git
+git clone https://github.com/ballred/obsidian-claude-pkm.git
 cd obsidian-claude-pkm
 
 # Option B: Download ZIP
@@ -60,14 +60,14 @@ The setup script will:
 
 ```bash
 # Copy vault template to your preferred location
-cp -r vault-template ~/Documents/MyPKM
+cp -r vault-template ~/Documents/ObsidianPKM
 
 # The .claude/commands directory is already included in the template
 # Verify commands are present
-ls ~/Documents/MyPKM/.claude/commands/
+ls ~/Documents/ObsidianPKM/.claude/commands/
 
 # Initialize git
-cd ~/Documents/MyPKM
+cd ~/Documents/ObsidianPKM
 git init
 ```
 
@@ -103,7 +103,7 @@ When prompted:
 
 ```bash
 # Navigate to your vault
-cd ~/Documents/MyPKM
+cd ~/Documents/ObsidianPKM
 
 # Initialize Claude Code
 claude init
@@ -170,7 +170,7 @@ gh repo create my-pkm --private
 
 # Or create manually on GitHub.com
 # Then add remote:
-git remote add origin https://github.com/yourusername/my-pkm.git
+git remote add origin https://github.com/ballred/my-pkm.git
 
 # Push to GitHub
 git push -u origin main

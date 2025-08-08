@@ -125,8 +125,11 @@ if command_exists claude; then
     fi
     
     # Initialize Claude in vault
-    claude init 2>/dev/null || true
-    print_success "Claude Code initialized in vault"
+    if claude init >/dev/null 2>&1; then
+        print_success "Claude Code initialized in vault"
+    else
+        print_warning "Claude Code initialization did not complete. You can run 'claude init' inside '$VAULT_PATH' later."
+    fi
 else
     print_warning "Skipping Claude Code setup (not installed)"
 fi
@@ -277,7 +280,13 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         read -p "Open Obsidian now? (y/n): " -n 1 -r
         echo
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            open -a Obsidian
+            # Try to open directly to this vault via obsidian URL
+            if command_exists python3; then
+                ENCODED_PATH=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$VAULT_PATH")
+                open "obsidian://open?path=$ENCODED_PATH" || open -a Obsidian
+            else
+                open -a Obsidian
+            fi
             print_success "Obsidian launched"
         fi
     fi
@@ -285,7 +294,13 @@ elif command_exists obsidian; then
     read -p "Open Obsidian now? (y/n): " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        obsidian &
+        # On Linux, try obsidian URL first if xdg-open available
+        if command_exists xdg-open && command_exists python3; then
+            ENCODED_PATH=$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$VAULT_PATH")
+            xdg-open "obsidian://open?path=$ENCODED_PATH" >/dev/null 2>&1 || obsidian &
+        else
+            obsidian &
+        fi
         print_success "Obsidian launched"
     fi
 fi

@@ -67,19 +67,26 @@ customize_mission() {
     read -p "Enter your mission statement: " MISSION
     
     if [ -n "$MISSION" ]; then
-        # Update files with mission
-        for file in "CLAUDE.md" "Templates/Daily Template.md"; do
-            if [ -f "$file" ]; then
-                # Backup original
-                cp "$file" "$file.bak"
-                # Update mission (handling both macOS and Linux)
-                if [[ "$OSTYPE" == "darwin"* ]]; then
-                    sed -i '' "1s/.*/_$MISSION_/" "$file"
-                else
-                    sed -i "1s/.*/_$MISSION_/" "$file"
-                fi
+        # Update mission in CLAUDE.md placeholder
+        if [ -f "CLAUDE.md" ]; then
+            cp "CLAUDE.md" "CLAUDE.md.bak"
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/\[CUSTOMIZE THIS: Add your personal mission statement or life purpose here\]/$MISSION/" "CLAUDE.md"
+            else
+                sed -i "s/\[CUSTOMIZE THIS: Add your personal mission statement or life purpose here\]/$MISSION/" "CLAUDE.md"
             fi
-        done
+        fi
+
+        # Update mission line in Daily Template placeholder
+        if [ -f "Templates/Daily Template.md" ]; then
+            cp "Templates/Daily Template.md" "Templates/Daily Template.md.bak"
+            if [[ "$OSTYPE" == "darwin"* ]]; then
+                sed -i '' "s/_\[CUSTOMIZE THIS: Add your personal mission statement or daily reminder here\]_/_$MISSION_/" "Templates/Daily Template.md"
+            else
+                sed -i "s/_\[CUSTOMIZE THIS: Add your personal mission statement or daily reminder here\]_/_$MISSION_/" "Templates/Daily Template.md"
+            fi
+        fi
+
         echo -e "${GREEN}✓ Mission statement updated${NC}"
     fi
     
