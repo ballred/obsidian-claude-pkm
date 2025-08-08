@@ -1,0 +1,33 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Obsidian
+.obsidian/workspace*
+.obsidian/cache
+.obsidian/hotkeys.json
+.obsidian/plugins/*/data.json
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Trash
+.trash/
+
+# Claude Code
+.conductor/
+.claude/cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Personal notes (users should add their own patterns)
+# private/
+# personal/

@@ -1,0 +1,287 @@
+# GitHub Action for Claude Code Integration
+# 
+# This workflow enables Claude Code to automatically process GitHub issues
+# and pull requests, allowing you to manage your PKM from anywhere.
+#
+# SETUP INSTRUCTIONS:
+# 1. Copy this file to .github/workflows/claude.yml in your vault repository
+# 2. Get your Claude Code OAuth token from: https://docs.anthropic.com/en/docs/claude-code/github-actions
+# 3. Add the token as a secret in your repository:
+#    - Go to Settings > Secrets and variables > Actions
+#    - Click "New repository secret"
+#    - Name: CLAUDE_CODE_OAUTH_TOKEN
+#    - Value: [Your token from step 2]
+# 4. Configure the workflow triggers below as needed
+
+name: Claude Code PKM Assistant
+
+# When this workflow runs
+on:
+  # Trigger when issues are opened or edited
+  issues:
+    types: [opened, edited]
+  
+  # Trigger when issue comments are created
+  issue_comment:
+    types: [created]
+  
+  # Trigger when pull requests are opened
+  pull_request:
+    types: [opened, edited]
+  
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Claude command to run'
+        required: false
+        default: '/daily'
+        type: choice
+        options:
+          - '/daily'
+          - '/weekly'
+          - '/onboard'
+          - '/push'
+  
+  # Optional: Run on schedule (uncomment to enable)
+  # schedule:
+  #   # Run daily at 6 AM UTC
+  #   - cron: '0 6 * * *'
+  #   # Run weekly review on Sundays at 8 PM UTC
+  #   - cron: '0 20 * * 0'
+
+# Environment variables
+env:
+  # Claude Code version to use
+  CLAUDE_CODE_VERSION: 'latest'
+  
+  # Default model for Claude to use
+  # Options: claude-3-opus, claude-3-sonnet, claude-3-haiku
+  CLAUDE_MODEL: 'claude-3-sonnet'
+  
+  # Timezone for date/time operations (customize this)
+  TZ: 'America/New_York'
+
+jobs:
+  # Job: Process GitHub Issues as Tasks
+  process-issue:
+    name: Process Issue with Claude
+    runs-on: ubuntu-latest
+    
+    # Only run on issues with specific labels
+    if: |
+      github.event_name == 'issues' && 
+      (contains(github.event.issue.labels.*.name, 'task') || 
+       contains(github.event.issue.labels.*.name, 'idea') ||
+       contains(github.event.issue.labels.*.name, 'claude'))
+    
+    steps:
+      # Check out the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Set up Claude Code
+      - name: Setup Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          version: ${{ env.CLAUDE_CODE_VERSION }}
+      
+      # Process the issue
+      - name: Process Issue Content
+        run: |
+          # Extract issue details
+          ISSUE_TITLE="${{ github.event.issue.title }}"
+          ISSUE_BODY="${{ github.event.issue.body }}"
+          ISSUE_NUMBER="${{ github.event.issue.number }}"
+          
+          # Determine action based on labels
+          if [[ "${{ contains(github.event.issue.labels.*.name, 'task') }}" == "true" ]]; then
+            # Add task to today's daily note
+            claude code "Add this task to today's daily note: $ISSUE_TITLE - $ISSUE_BODY"
+          elif [[ "${{ contains(github.event.issue.labels.*.name, 'idea') }}" == "true" ]]; then
+            # Capture idea in appropriate location
+            claude code "Capture this idea in the appropriate project or notes: $ISSUE_TITLE - $ISSUE_BODY"
+          fi
+          
+          # Comment on issue to confirm processing
+          gh issue comment $ISSUE_NUMBER --body "✅ Processed by Claude Code and added to vault"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      # Commit and push changes
+      - name: Commit Changes
+        run: |
+          git config --local user.email "claude-bot@example.com"
+          git config --local user.name "Claude Assistant"
+          git add .
+          git diff --staged --quiet || git commit -m "Process issue #${{ github.event.issue.number }}: ${{ github.event.issue.title }}"
+          git push
+
+  # Job: Daily Note Creation
+  daily-note:
+    name: Create Daily Note
+    runs-on: ubuntu-latest
+    
+    # Run on schedule or manual trigger
+    if: |
+      github.event_name == 'workflow_dispatch' && 
+      github.event.inputs.command == '/daily'
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      
+      - name: Create Daily Note
+        run: |
+          # Load context
+          claude code /onboard
+          
+          # Create today's daily note
+          claude code /daily
+          
+          # Optional: Add weather, calendar events, etc.
+          # claude code "Add today's weather forecast to the daily note"
+          # claude code "Add calendar events for today"
+      
+      - name: Commit Daily Note
+        run: |
+          git config --local user.email "claude-bot@example.com"
+          git config --local user.name "Claude Assistant"
+          git add .
+          DATE=$(date +%Y-%m-%d)
+          git diff --staged --quiet || git commit -m "Daily note for $DATE"
+          git push
+
+  # Job: Weekly Review
+  weekly-review:
+    name: Run Weekly Review
+    runs-on: ubuntu-latest
+    
+    # Run on Sundays or manual trigger
+    if: |
+      (github.event_name == 'schedule' && contains(github.event.schedule, '0 20 * * 0')) ||
+      (github.event_name == 'workflow_dispatch' && github.event.inputs.command == '/weekly')
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      
+      - name: Run Weekly Review
+        run: |
+          # Load full context
+          claude code /onboard all
+          
+          # Run weekly review
+          claude code /weekly
+          
+          # Generate summary
+          claude code "Create a summary of this week's accomplishments and next week's priorities"
+      
+      - name: Commit Weekly Review
+        run: |
+          git config --local user.email "claude-bot@example.com"
+          git config --local user.name "Claude Assistant"
+          git add .
+          WEEK=$(date +%Y-W%V)
+          git diff --staged --quiet || git commit -m "Weekly review for $WEEK"
+          git push
+
+  # Job: Smart Assistance on Pull Requests
+  assist-pr:
+    name: Assist with Pull Request
+    runs-on: ubuntu-latest
+    
+    if: github.event_name == 'pull_request'
+    
+    steps:
+      - name: Checkout PR Branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      
+      - name: Setup Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+      
+      - name: Review Changes
+        run: |
+          # Get changed files
+          CHANGED_FILES=$(git diff --name-only origin/main..HEAD)
+          
+          # Have Claude review the changes
+          claude code "Review these changed files and provide feedback: $CHANGED_FILES"
+          
+          # Post review as PR comment
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body "$(claude code 'Summarize your review findings')"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+# Workflow Configuration Notes:
+#
+# CUSTOMIZATION OPTIONS:
+#
+# 1. **Triggers**: Adjust the 'on' section to control when the workflow runs
+#    - Remove triggers you don't need
+#    - Add schedule triggers for automation
+#    - Customize issue labels that trigger processing
+#
+# 2. **Claude Model**: Change CLAUDE_MODEL in env section
+#    - claude-3-opus: Most capable, best for complex tasks
+#    - claude-3-sonnet: Balanced performance
+#    - claude-3-haiku: Fastest, good for simple tasks
+#
+# 3. **Time Zone**: Update TZ in env section to your local timezone
+#
+# 4. **Custom Commands**: Add new jobs for your specific workflows
+#
+# SECURITY NOTES:
+#
+# - Keep CLAUDE_CODE_OAUTH_TOKEN secret and never commit it
+# - Use GitHub's built-in GITHUB_TOKEN when possible
+# - Review permissions before enabling workflow
+# - Consider using environment protection rules for sensitive operations
+#
+# USAGE EXAMPLES:
+#
+# 1. **Create task from mobile**:
+#    - Open GitHub mobile app
+#    - Create new issue with 'task' label
+#    - Claude adds it to your daily note
+#
+# 2. **Capture ideas on the go**:
+#    - Create issue with 'idea' label
+#    - Claude files it in appropriate project
+#
+# 3. **Remote daily planning**:
+#    - Manually trigger workflow
+#    - Select '/daily' command
+#    - Claude creates daily note
+#
+# TROUBLESHOOTING:
+#
+# - Check Actions tab for workflow runs and logs
+# - Verify CLAUDE_CODE_OAUTH_TOKEN is set correctly
+# - Ensure repository has Actions enabled
+# - Check file permissions and paths
+#
+# For more information:
+# https://docs.anthropic.com/en/docs/claude-code/github-actions
