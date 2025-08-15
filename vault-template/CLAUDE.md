@@ -101,11 +101,26 @@
 - `/push` - Commits and pushes changes to Git
 - `/onboard` - Reads all CLAUDE.md files for context
 
+### Output Styles
+Claude Code now supports different personality modes! This vault includes:
+
+- **Productivity Coach** - An accountability-focused coach that:
+  - Challenges you to clarify your true intentions
+  - Points out gaps between goals and actions
+  - Asks powerful questions to create momentum
+  - Holds you accountable to commitments
+  
+To use: 
+- Type `/output-style` in Claude Code for an interactive menu
+- Or directly switch with: `/output-style coach`
+- Your preference is automatically saved in `.claude/settings.local.json`
+
 ### Best Practices with Claude
 1. **Be Specific** - Give clear context about what you need
 2. **Use Project Context** - Reference project CLAUDE.md files
-3. **Iterate** - Claude can help refine and improve your notes
-4. **Review Suggestions** - Claude's suggestions are starting points
+3. **Try Different Styles** - Use coach mode when you need accountability
+4. **Iterate** - Claude can help refine and improve your notes
+5. **Review Suggestions** - Claude's suggestions are starting points
 
 ## 📱 Mobile Access (via GitHub)
 

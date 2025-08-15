@@ -135,7 +135,26 @@ claude code /daily
 # You should see a new file in Daily Notes/
 ```
 
-### Step 4: Customize Context
+### Step 4: Configure Output Styles
+
+The vault includes a Productivity Coach output style that makes Claude more accountability-focused:
+
+```bash
+# Start Claude Code
+claude
+
+# Then use the output style commands:
+/output-style              # Opens interactive menu to choose a style
+/output-style coach        # Directly activates the coach style
+
+# The coach will challenge you with questions like:
+# - "What's the ONE thing that would make everything else easier?"
+# - "What are you avoiding by reorganizing instead of doing?"
+```
+
+Your style preference is automatically saved in `.claude/settings.local.json`. The output style file is located at `.claude/output-styles/coach.md` if you want to customize it.
+
+### Step 5: Customize Context
 
 Edit `CLAUDE.md` in your vault root:
 1. Add your personal mission statement

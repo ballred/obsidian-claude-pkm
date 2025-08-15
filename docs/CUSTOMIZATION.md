@@ -8,9 +8,10 @@ Make this PKM system truly yours. This guide covers everything from simple tweak
 3. [Folder Structure](#folder-structure)
 4. [Tag System](#tag-system)
 5. [Claude Commands](#claude-commands)
-6. [Workflow Automation](#workflow-automation)
-7. [Theme and Appearance](#theme-and-appearance)
-8. [Advanced Configurations](#advanced-configurations)
+6. [Output Styles](#output-styles)
+7. [Workflow Automation](#workflow-automation)
+8. [Theme and Appearance](#theme-and-appearance)
+9. [Advanced Configurations](#advanced-configurations)
 
 ## Quick Customizations
 
@@ -301,6 +302,94 @@ const MORNING_ROUTINE_START = "05:00";
 
 // For parents
 const INCLUDE_FAMILY_SECTION = true;
+```
+
+## Output Styles
+
+### Using the Productivity Coach
+
+The included Productivity Coach style transforms Claude into an accountability partner:
+
+```bash
+# Start Claude Code
+claude
+
+# Then choose your output style:
+/output-style              # Opens interactive menu to select a style
+/output-style coach        # Directly activates the coach style
+
+# Example interaction with coach:
+# You: "I'm procrastinating on my report"
+# Coach: "What's the smallest action you could take right now that would create momentum?"
+```
+
+Your style preference is automatically saved to `.claude/settings.local.json` for the current project.
+
+### Creating Custom Output Styles
+
+Create new personality modes in `.claude/output-styles/`:
+
+```bash
+# Quick way to create a new style:
+/output-style:new I want a style that acts as a technical mentor
+
+# Or manually create files in .claude/output-styles/
+```
+
+#### Example: Technical Mentor
+Create `.claude/output-styles/mentor.md`:
+```markdown
+---
+name: Technical Mentor
+description: Patient technical guidance with learning focus
+---
+
+You are a experienced technical mentor who helps users learn and grow. Focus on:
+
+- Breaking down complex concepts into understandable pieces
+- Providing examples and analogies
+- Encouraging experimentation and learning from mistakes
+- Suggesting resources for deeper learning
+- Celebrating progress and understanding
+
+Always teach the "why" behind the "how".
+```
+
+#### Example: Creative Brainstormer
+Create `.claude/output-styles/creative.md`:
+```markdown
+---
+name: Creative Brainstormer  
+description: Expansive thinking and idea generation
+---
+
+You are a creative collaborator who helps generate and expand ideas. Focus on:
+
+- "Yes, and..." thinking to build on ideas
+- Asking "What if?" questions
+- Making unexpected connections
+- Challenging assumptions playfully
+- Generating multiple alternatives
+- Embracing wild possibilities before filtering
+
+No idea is too crazy in brainstorming mode!
+```
+
+### Modifying the Coach Style
+
+Edit `.claude/output-styles/coach.md` to adjust the coaching approach:
+
+```markdown
+# Make it gentler
+**Challenge with Empathy**: → **Support with Understanding**:
+
+# Make it more intense
+**The ONE Thing Priority**: → **The ONLY Thing That Matters**:
+
+# Add domain-specific focus
+## Fitness Coaching Focus
+- "What workout will you complete today?"
+- "How does this meal align with your goals?"
 ```
 
 ## Workflow Automation

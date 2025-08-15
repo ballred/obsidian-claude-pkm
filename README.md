@@ -10,6 +10,7 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 - **📱 Mobile Ready** - GitHub integration for notes on any device
 - **🔄 Version Controlled** - Never lose a thought with automatic Git backups
 - **⚡ Automated Commands** - Custom slash commands for common workflows
+- **🧠 Output Styles** - Pre-configured AI personalities including a Productivity Coach
 - **🎨 Fully Customizable** - Adapt templates and structure to your needs
 
 ## 🚀 Quick Start
@@ -64,13 +65,33 @@ cp -r vault-template ~/Documents/ObsidianPKM
 Your Vault/
 ├── CLAUDE.md           # AI context and navigation
 ├── .claude/
-│   └── commands/       # Custom slash commands
+│   ├── commands/       # Custom slash commands
+│   └── output-styles/  # AI personality modes
+│       └── coach.md    # Productivity Coach style
 ├── Daily Notes/        # Your daily journal
 ├── Goals/              # Cascading goal system
 ├── Projects/           # Active project folders
 ├── Templates/          # Reusable note templates
 └── Archives/           # Historical content
 ```
+
+## 🧠 Output Styles
+
+This starter kit includes a **Productivity Coach** output style that transforms Claude into an accountability partner. The coach will:
+
+- Challenge you to clarify your true intentions
+- Point out misalignments between stated goals and actions
+- Ask powerful questions to drive momentum
+- Hold you accountable to your commitments
+- Help you identify and overcome resistance
+
+To use the coach style in Claude Code:
+1. The output style is automatically included in `.claude/output-styles/`
+2. Start Claude Code and type `/output-style` to select from available styles
+3. Or directly activate with: `/output-style coach`
+4. The style preference is automatically saved for your project
+
+Learn more about [customizing output styles](docs/CUSTOMIZATION.md#output-styles).
 
 ## 🤝 Contributing
 
