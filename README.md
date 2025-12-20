@@ -2,16 +2,24 @@
 
 A complete personal knowledge management system that combines Obsidian's powerful note-taking with Claude Code's AI assistance. Go from zero to a fully functional PKM in 15 minutes or less.
 
+**v2.0** - Now with hooks, custom agents, skills, and modular rules.
+
 ## ✨ Features
 
+### Core PKM
 - **🎯 Goal-Aligned System** - Cascading goals from 3-year vision to daily tasks
-- **🤖 AI-Powered Workflows** - Claude Code integration for intelligent note management
 - **📅 Daily Notes System** - Structured daily planning and reflection
 - **📱 Mobile Ready** - GitHub integration for notes on any device
 - **🔄 Version Controlled** - Never lose a thought with automatic Git backups
-- **⚡ Automated Commands** - Custom slash commands for common workflows
-- **🧠 Output Styles** - Pre-configured AI personalities including a Productivity Coach
 - **🎨 Fully Customizable** - Adapt templates and structure to your needs
+
+### AI-Powered (v2.0)
+- **🪝 Hooks** - Auto-commit on save, session initialization
+- **🤖 Custom Agents** - Note organizer, weekly reviewer, goal aligner, inbox processor
+- **⚡ Skills** - Auto-discovered capabilities for vault ops, goal tracking, daily workflows
+- **📏 Modular Rules** - Path-specific conventions for markdown, productivity, projects
+- **🧠 Output Styles** - Productivity Coach for accountability
+- **📊 Status Line** - Vault stats in terminal (note count, inbox, uncommitted changes)
 
 ## 🚀 Quick Start
 
@@ -63,16 +71,38 @@ cp -r vault-template ~/Documents/ObsidianPKM
 
 ```
 Your Vault/
-├── CLAUDE.md           # AI context and navigation
+├── CLAUDE.md                    # AI context and navigation
+├── CLAUDE.local.md.template     # Template for personal overrides
+├── .claude-plugin/
+│   └── plugin.json              # Plugin manifest
 ├── .claude/
-│   ├── commands/       # Custom slash commands
-│   └── output-styles/  # AI personality modes
-│       └── coach.md    # Productivity Coach style
-├── Daily Notes/        # Your daily journal
-├── Goals/              # Cascading goal system
-├── Projects/           # Active project folders
-├── Templates/          # Reusable note templates
-└── Archives/           # Historical content
+│   ├── commands/                # Slash commands (/daily, /weekly, /push, /onboard)
+│   ├── agents/                  # Custom AI agents (NEW)
+│   │   ├── note-organizer.md
+│   │   ├── weekly-reviewer.md
+│   │   ├── goal-aligner.md
+│   │   └── inbox-processor.md
+│   ├── skills/                  # Auto-discovered capabilities (NEW)
+│   │   ├── obsidian-vault-ops/
+│   │   ├── goal-tracking/
+│   │   └── daily-workflow/
+│   ├── hooks/                   # Event automation (NEW)
+│   │   ├── session-init.sh
+│   │   └── auto-commit.sh
+│   ├── rules/                   # Path-specific conventions (NEW)
+│   │   ├── markdown-standards.md
+│   │   ├── productivity-workflow.md
+│   │   └── project-management.md
+│   ├── scripts/
+│   │   └── statusline.sh        # Terminal status display (NEW)
+│   ├── output-styles/
+│   │   └── coach.md             # Productivity Coach
+│   └── settings.json            # Permissions and config (NEW)
+├── Daily Notes/
+├── Goals/
+├── Projects/
+├── Templates/
+└── Archives/
 ```
 
 ## 🧠 Output Styles
@@ -92,6 +122,47 @@ To use the coach style in Claude Code:
 4. The style preference is automatically saved for your project
 
 Learn more about [customizing output styles](docs/CUSTOMIZATION.md#output-styles).
+
+## 🤖 Custom Agents (v2.0)
+
+Ask Claude to use specialized agents for common PKM tasks:
+
+```bash
+# Organize your vault and fix broken links
+claude "Use the note-organizer agent to audit my vault"
+
+# Facilitate weekly review aligned with goals
+claude "Use the weekly-reviewer agent for my weekly review"
+
+# Check if daily work aligns with long-term goals
+claude "Use the goal-aligner agent to analyze my recent activity"
+
+# Process inbox items using GTD principles
+claude "Use the inbox-processor agent to clear my inbox"
+```
+
+## 🔄 Upgrading from v1.x
+
+If you have an existing vault from v1.x:
+
+```bash
+# 1. Copy new directories to your vault
+cp -r vault-template/.claude-plugin your-vault/
+cp -r vault-template/.claude/agents your-vault/.claude/
+cp -r vault-template/.claude/skills your-vault/.claude/
+cp -r vault-template/.claude/hooks your-vault/.claude/
+cp -r vault-template/.claude/rules your-vault/.claude/
+cp -r vault-template/.claude/scripts your-vault/.claude/
+cp vault-template/.claude/settings.json your-vault/.claude/
+cp vault-template/CLAUDE.local.md.template your-vault/
+
+# 2. Review and merge CLAUDE.md changes
+# Your customizations are preserved, just add references to new features
+
+# 3. Make hook scripts executable
+chmod +x your-vault/.claude/hooks/*.sh
+chmod +x your-vault/.claude/scripts/*.sh
+```
 
 ## 🤝 Contributing
 

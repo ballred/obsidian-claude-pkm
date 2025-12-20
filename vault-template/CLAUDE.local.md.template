@@ -1,0 +1,53 @@
+# Personal Overrides - CLAUDE.local.md
+
+Copy this file to `CLAUDE.local.md` to add personal customizations that won't be committed to git.
+
+## My Mission
+
+[Your personal mission statement - what drives you]
+
+## Working Style
+
+- **Communication:** [Direct / Collaborative / Detailed]
+- **Feedback:** [Gentle / Direct / Challenging]
+- **Planning:** [Detailed plans / Flexible / Minimal]
+
+## Schedule & Energy
+
+- **Timezone:** America/New_York
+- **Best Focus Time:** [Morning / Afternoon / Evening]
+- **Work Hours:** 9am - 5pm
+- **Review Day:** [Sunday / Monday]
+
+## Current Life Context
+
+[Any personal context that affects your productivity - optional]
+
+## Private Goals
+
+[Goals you don't want in the shared CLAUDE.md]
+
+## Personal Preferences
+
+### Daily Notes
+- Include weather: [Yes / No]
+- Include quote: [Yes / No]
+- Time block style: [30 min / 1 hour / 2 hour]
+
+### Coaching Intensity
+- Challenge level: [Gentle / Moderate / Intense]
+- Accountability check-ins: [Daily / Weekly]
+
+## Custom Tags
+
+Add personal tags not in the standard system:
+- #[your-tag-1]
+- #[your-tag-2]
+
+## Notes for Claude
+
+[Any specific instructions for how Claude should work with you]
+
+---
+
+*This file is gitignored and will not be committed*

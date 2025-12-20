@@ -599,6 +599,123 @@ Use Tasker or Automate for:
 - [ ] [Task from external system]
 ```
 
+## v2.0 Features: Hooks, Agents, Skills & Rules
+
+### Hooks (Automatic Behaviors)
+
+Hooks are automatic behaviors triggered by Claude Code events. Located in `.claude/settings.json`:
+
+#### Disabling Auto-Commit
+```json
+{
+  "hooks": {
+    "PostToolUse": []
+  }
+}
+```
+
+#### Adding Custom Hooks
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "your-script.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### Custom Agents
+
+Agents are specialized AI assistants. Located in `.claude/agents/`:
+
+#### Creating a Custom Agent
+Create `.claude/agents/my-agent.md`:
+```markdown
+---
+name: my-agent
+description: What this agent does. Claude uses this to decide when to invoke it.
+tools: Read, Write, Edit, Glob, Grep
+model: sonnet
+---
+
+# Agent Instructions
+
+[Detailed instructions for the agent's behavior]
+```
+
+#### Included Agents
+- `note-organizer` - Vault organization and link maintenance
+- `weekly-reviewer` - Weekly review facilitation
+- `goal-aligner` - Goal-activity alignment analysis
+- `inbox-processor` - GTD-style inbox processing
+
+### Skills (Auto-Discovered Capabilities)
+
+Skills are capabilities Claude discovers and uses automatically. Located in `.claude/skills/`:
+
+#### Creating a Custom Skill
+Create `.claude/skills/my-skill/SKILL.md`:
+```markdown
+---
+name: my-skill
+description: What this skill does. Use for [specific situations].
+allowed-tools: Read, Write, Edit
+---
+
+# Skill Instructions
+
+[How to use this skill]
+```
+
+#### Included Skills
+- `obsidian-vault-ops` - Vault file operations
+- `goal-tracking` - Goal cascade management
+- `daily-workflow` - Daily routine structure
+
+### Modular Rules
+
+Rules are path-specific conventions. Located in `.claude/rules/`:
+
+#### Creating Custom Rules
+Create `.claude/rules/my-rules.md`:
+```markdown
+---
+paths: "MyFolder/**/*.md"
+---
+
+# Rules for MyFolder
+
+[Specific conventions for files matching the pattern]
+```
+
+#### Included Rules
+- `markdown-standards.md` - File naming, tags, frontmatter
+- `productivity-workflow.md` - Goal cascade, planning
+- `project-management.md` - Project structure, status tracking
+
+### Personal Overrides (CLAUDE.local.md)
+
+For personal customizations that shouldn't be committed:
+
+```bash
+cp CLAUDE.local.md.template CLAUDE.local.md
+```
+
+This file is gitignored. Use it for:
+- Personal mission statement
+- Working style preferences
+- Private goals
+- Custom coaching intensity
+
 ## Best Practices
 
 ### Start Simple

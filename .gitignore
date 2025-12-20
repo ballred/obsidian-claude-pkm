@@ -17,6 +17,8 @@
 # Claude Code
 .conductor/
 .claude/cache/
+.claude/settings.local.json
+CLAUDE.local.md
 
 # IDE
 .vscode/

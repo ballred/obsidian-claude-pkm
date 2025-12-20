@@ -1,0 +1,60 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(date:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Read(*)",
+      "Write(Daily Notes/**)",
+      "Write(Goals/**)",
+      "Write(Projects/**)",
+      "Write(Archives/**)",
+      "Write(Templates/**)",
+      "Write(Inbox/**)",
+      "Edit(Daily Notes/**)",
+      "Edit(Goals/**)",
+      "Edit(Projects/**)",
+      "Edit(Templates/**)"
+    ],
+    "deny": [
+      "Edit(.claude/**)",
+      "Write(.git/**)",
+      "Bash(rm -rf:*)"
+    ]
+  },
+  "env": {
+    "VAULT_PATH": "${cwd}",
+    "DAILY_NOTES_DIR": "Daily Notes",
+    "GOALS_DIR": "Goals",
+    "PROJECTS_DIR": "Projects",
+    "TEMPLATES_DIR": "Templates",
+    "ARCHIVES_DIR": "Archives",
+    "GIT_AUTO_COMMIT": "true"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/session-init.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".claude/hooks/auto-commit.sh \"$TOOL_INPUT_FILE_PATH\""
+          }
+        ]
+      }
+    ]
+  }
+}

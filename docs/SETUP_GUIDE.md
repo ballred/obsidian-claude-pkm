@@ -99,6 +99,20 @@ When prompted:
 
 ## Phase 3: Claude Code Integration (10 minutes)
 
+### New in v2.0: Plugin Features
+
+Your vault now includes a full Claude Code plugin with advanced features:
+
+| Feature | Description |
+|---------|-------------|
+| **Hooks** | Auto-commit on file changes, session initialization |
+| **Agents** | Specialized AI assistants for note organization, weekly review, goal alignment |
+| **Skills** | Auto-discovered capabilities for vault operations, goal tracking, daily workflows |
+| **Rules** | Path-specific conventions for markdown, productivity, projects |
+| **Status Line** | Terminal display of vault stats (note count, inbox, uncommitted changes) |
+
+These work automatically once your vault is set up.
+
 ### Step 1: Configure Claude Code
 
 ```bash
@@ -154,13 +168,33 @@ claude
 
 Your style preference is automatically saved in `.claude/settings.local.json`. The output style file is located at `.claude/output-styles/coach.md` if you want to customize it.
 
-### Step 5: Customize Context
+### Step 5: Using Agents (New in v2.0)
+
+The vault includes 4 specialized agents for common PKM tasks:
+
+```bash
+# Organize your vault, fix broken links
+claude "Use the note-organizer agent to audit my vault"
+
+# Run a guided weekly review
+claude "Use the weekly-reviewer agent to help with my weekly review"
+
+# Check goal alignment
+claude "Use the goal-aligner agent to analyze my recent activity"
+
+# Process your inbox
+claude "Use the inbox-processor agent to clear my inbox"
+```
+
+### Step 6: Customize Context
 
 Edit `CLAUDE.md` in your vault root:
 1. Add your personal mission statement
 2. Define your working preferences
 3. Set your current focus areas
 4. Add any specific instructions for Claude
+
+For personal overrides, copy `CLAUDE.local.md.template` to `CLAUDE.local.md` (gitignored).
 
 ## Phase 4: Git Setup (5 minutes)
 

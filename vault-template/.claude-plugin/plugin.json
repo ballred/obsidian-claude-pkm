@@ -1,0 +1,28 @@
+{
+  "name": "obsidian-pkm",
+  "version": "2.0.0",
+  "description": "Personal Knowledge Management system for Obsidian with AI-powered workflows, goal tracking, and productivity coaching",
+  "author": {
+    "name": "Bill Allred",
+    "url": "https://github.com/ballred"
+  },
+  "repository": "https://github.com/ballred/obsidian-claude-pkm",
+  "license": "MIT",
+  "capabilities": {
+    "commands": true,
+    "agents": true,
+    "skills": true,
+    "hooks": true,
+    "outputStyles": true,
+    "rules": true
+  },
+  "keywords": [
+    "obsidian",
+    "pkm",
+    "productivity",
+    "goals",
+    "daily-notes",
+    "weekly-review",
+    "gtd"
+  ]
+}
