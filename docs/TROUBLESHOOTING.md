@@ -95,7 +95,7 @@ Common issues and their solutions. If you can't find your issue here, check the 
 1. Install Claude Code:
    ```bash
    # Check installation guide
-   # https://docs.anthropic.com/en/docs/claude-code
+   # https://code.claude.com/docs
    ```
 
 2. Add to PATH:
@@ -476,7 +476,7 @@ rm -rf node_modules .obsidian/cache
 
 ### Resources
 - [Obsidian Forum](https://forum.obsidian.md/)
-- [Claude Code Docs](https://docs.anthropic.com/en/docs/claude-code)
+- [Claude Code Docs](https://code.claude.com/docs)
 - [GitHub Issues](https://github.com/ballred/obsidian-claude-pkm/issues)
 
 ### Debug Information

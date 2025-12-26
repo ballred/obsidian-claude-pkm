@@ -5,7 +5,7 @@
 #
 # SETUP INSTRUCTIONS:
 # 1. Copy this file to .github/workflows/claude.yml in your vault repository
-# 2. Get your Claude Code OAuth token from: https://docs.anthropic.com/en/docs/claude-code/github-actions
+# 2. Get your Claude Code OAuth token from: https://code.claude.com/docs/en/github-actions
 # 3. Add the token as a secret in your repository:
 #    - Go to Settings > Secrets and variables > Actions
 #    - Click "New repository secret"
@@ -284,4 +284,4 @@ jobs:
 # - Check file permissions and paths
 #
 # For more information:
-# https://docs.anthropic.com/en/docs/claude-code/github-actions
+# https://code.claude.com/docs/en/github-actions

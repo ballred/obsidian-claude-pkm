@@ -25,7 +25,7 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 
 ### Prerequisites
 - [Obsidian](https://obsidian.md/) installed
-- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed
+- [Claude Code CLI](https://code.claude.com/docs) installed
 - Git installed
 - GitHub account (optional, for mobile sync)
 
@@ -34,7 +34,7 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 # 1) Install prerequisites (once)
 # - Obsidian: https://obsidian.md/
 # - Git: https://git-scm.com/
-# - Claude Code CLI: https://docs.anthropic.com/en/docs/claude-code
+# - Claude Code CLI: https://code.claude.com/docs
 
 # 2) Clone this repository
 git clone https://github.com/ballred/obsidian-claude-pkm.git

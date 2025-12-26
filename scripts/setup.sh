@@ -60,7 +60,7 @@ if command_exists claude; then
     print_success "Claude Code is installed ($(claude --version 2>/dev/null || echo 'version check failed'))"
 else
     print_warning "Claude Code CLI not found"
-    echo "Install from: https://docs.anthropic.com/en/docs/claude-code"
+    echo "Install from: https://code.claude.com/docs"
     read -p "Continue without Claude Code? (y/n): " -n 1 -r
     echo
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then

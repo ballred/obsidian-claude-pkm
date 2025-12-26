@@ -35,7 +35,7 @@ if %errorlevel%==0 (
     echo [OK] Claude Code is installed
 ) else (
     echo [WARNING] Claude Code CLI not found
-    echo Install from: https://docs.anthropic.com/en/docs/claude-code
+    echo Install from: https://code.claude.com/docs
     set /p CONTINUE="Continue without Claude Code? (y/n): "
     if /i not "!CONTINUE!"=="y" exit /b 1
 )

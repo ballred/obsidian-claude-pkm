@@ -8,7 +8,7 @@ Before starting, ensure you have:
 
 - [ ] **Obsidian** installed ([Download here](https://obsidian.md/))
 - [ ] **Git** installed ([Download here](https://git-scm.com/))
-- [ ] **Claude Code CLI** installed ([Instructions](https://docs.anthropic.com/en/docs/claude-code))
+- [ ] **Claude Code CLI** installed ([Instructions](https://code.claude.com/docs))
 - [ ] **GitHub account** (optional, for sync) ([Sign up](https://github.com))
 - [ ] **Text editor** (for configuration files)
 
@@ -238,7 +238,7 @@ cp github-actions/claude.yml .github/workflows/
 ```
 
 2. Get Claude Code OAuth token:
-   - Visit: https://docs.anthropic.com/en/docs/claude-code/github-actions
+   - Visit: https://code.claude.com/docs/en/github-actions
    - Follow instructions to get token
 
 3. Add token to GitHub:
