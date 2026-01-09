@@ -1,3 +1,7 @@
+**📊 [Take the quick poll](https://github.com/ballred/obsidian-claude-pkm/discussions/4)** - Help shape what gets built next!
+
+---
+
 # Obsidian + Claude Code PKM Starter Kit 🚀
 
 A complete personal knowledge management system that combines Obsidian's powerful note-taking with Claude Code's AI assistance. Go from zero to a fully functional PKM in 15 minutes or less.
