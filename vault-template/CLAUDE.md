@@ -26,14 +26,18 @@ See @Goals/2. Monthly Goals.md for this month's priorities.
 **Status:** `#active`, `#waiting`, `#completed`, `#archived`
 **Context:** `#work`, `#personal`, `#health`, `#learning`, `#family`
 
-## Available Commands
+## Available Skills
 
-| Command | Purpose |
-|---------|---------|
-| `/daily` | Create today's daily note from template |
-| `/weekly` | Run weekly review process |
-| `/push` | Commit and push changes to Git |
-| `/onboard` | Load full vault context |
+Skills are invoked with `/skill-name` or automatically by Claude when relevant.
+
+| Skill | Invocation | Purpose |
+|-------|------------|---------|
+| `daily-workflow` | `/daily-workflow` | Create daily notes, morning/midday/evening routines |
+| `weekly-review` | `/weekly-review` | Run weekly review, reflect and plan |
+| `push` | `/push` | Commit and push changes to Git |
+| `onboard` | `/onboard` | Load full vault context |
+| `goal-tracking` | (auto) | Track progress across goal cascade |
+| `obsidian-vault-ops` | (auto) | Read/write vault files, manage wiki-links |
 
 ## Available Agents
 
@@ -43,12 +47,6 @@ See @Goals/2. Monthly Goals.md for this month's priorities.
 | `weekly-reviewer` | Facilitate weekly review aligned with goals |
 | `goal-aligner` | Check daily/weekly alignment with long-term goals |
 | `inbox-processor` | GTD-style inbox processing |
-
-## Available Skills
-
-- **obsidian-vault-ops** - Read/write vault files, manage wiki-links
-- **goal-tracking** - Track progress across goal cascade
-- **daily-workflow** - Morning/midday/evening routines
 
 ## Output Styles
 
@@ -61,7 +59,7 @@ See @Goals/2. Monthly Goals.md for this month's priorities.
 ## Daily Workflow
 
 ### Morning (5 min)
-1. Run `/daily` to create today's note
+1. Run `/daily-workflow` to create today's note
 2. Identify ONE main focus
 3. Review yesterday's incomplete tasks
 4. Set time blocks
@@ -72,7 +70,7 @@ See @Goals/2. Monthly Goals.md for this month's priorities.
 3. Run `/push` to save changes
 
 ### Weekly (30 min - Sunday)
-1. Run `/weekly` for guided review
+1. Run `/weekly-review` for guided review
 2. Calculate goal progress
 3. Plan next week's focus
 4. Archive old notes
@@ -92,5 +90,5 @@ See `CLAUDE.local.md.template` for format.
 ---
 
 *See @.claude/rules/ for detailed conventions*
-*Last Updated: 2024-12-19*
-*System Version: 2.0*
+*Last Updated: 2026-01-10*
+*System Version: 2.1 (Unified Skills)*

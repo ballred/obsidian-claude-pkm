@@ -6,7 +6,7 @@
 
 A complete personal knowledge management system that combines Obsidian's powerful note-taking with Claude Code's AI assistance. Go from zero to a fully functional PKM in 15 minutes or less.
 
-**v2.0** - Now with hooks, custom agents, skills, and modular rules.
+**v2.1** - Unified skills pattern (skills and slash commands merged), hooks, agents, and rules.
 
 ## ✨ Features
 
@@ -17,10 +17,10 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 - **🔄 Version Controlled** - Never lose a thought with automatic Git backups
 - **🎨 Fully Customizable** - Adapt templates and structure to your needs
 
-### AI-Powered (v2.0)
+### AI-Powered (v2.1)
+- **⚡ Unified Skills** - Skills and slash commands merged (`/daily-workflow`, `/weekly-review`, `/push`, `/onboard`)
 - **🪝 Hooks** - Auto-commit on save, session initialization
 - **🤖 Custom Agents** - Note organizer, weekly reviewer, goal aligner, inbox processor
-- **⚡ Skills** - Auto-discovered capabilities for vault ops, goal tracking, daily workflows
 - **📏 Modular Rules** - Path-specific conventions for markdown, productivity, projects
 - **🧠 Output Styles** - Productivity Coach for accountability
 - **📊 Status Line** - Vault stats in terminal (note count, inbox, uncommitted changes)
@@ -80,16 +80,18 @@ Your Vault/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
 ├── .claude/
-│   ├── commands/                # Slash commands (/daily, /weekly, /push, /onboard)
-│   ├── agents/                  # Custom AI agents (NEW)
+│   ├── agents/                  # Custom AI agents
 │   │   ├── note-organizer.md
 │   │   ├── weekly-reviewer.md
 │   │   ├── goal-aligner.md
 │   │   └── inbox-processor.md
-│   ├── skills/                  # Auto-discovered capabilities (NEW)
-│   │   ├── obsidian-vault-ops/
-│   │   ├── goal-tracking/
-│   │   └── daily-workflow/
+│   ├── skills/                  # Unified skills (invoke with /skill-name)
+│   │   ├── daily-workflow/      # /daily-workflow - Create daily notes, routines
+│   │   ├── weekly-review/       # /weekly-review - Weekly review process
+│   │   ├── push/                # /push - Git commit and push
+│   │   ├── onboard/             # /onboard - Load vault context
+│   │   ├── goal-tracking/       # Auto: Track goal progress
+│   │   └── obsidian-vault-ops/  # Auto: Vault file operations
 │   ├── hooks/                   # Event automation (NEW)
 │   │   ├── session-init.sh
 │   │   └── auto-commit.sh

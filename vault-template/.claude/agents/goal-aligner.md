@@ -87,4 +87,4 @@ When analyzing, surface these insights:
 Works well with:
 - Weekly Reviewer agent for regular check-ins
 - Productivity Coach output style for accountability
-- `/onboard` command for full context
+- `/onboard` skill for full context
