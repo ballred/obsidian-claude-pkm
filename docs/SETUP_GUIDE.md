@@ -134,7 +134,7 @@ claude "Hello, I'm setting up my PKM system"
 ls .claude/skills/
 
 # You should see:
-# daily-workflow/  weekly-review/  push/  onboard/  goal-tracking/  obsidian-vault-ops/
+# daily/  weekly/  push/  onboard/  goal-tracking/  obsidian-vault-ops/
 ```
 
 ### Step 3: Test Skills
@@ -144,7 +144,7 @@ ls .claude/skills/
 claude code /onboard
 
 # Create your first daily note
-claude code /daily-workflow
+claude code /daily
 
 # You should see a new file in Daily Notes/
 ```
@@ -293,7 +293,7 @@ Run through this checklist to ensure everything is working:
 
 - [ ] Obsidian opens your vault without errors
 - [ ] CLAUDE.md has your personalized content
-- [ ] `/daily-workflow` skill creates today's note
+- [ ] `/daily` skill creates today's note
 - [ ] `/onboard` skill loads your context
 - [ ] Git commits work locally
 - [ ] GitHub remote is connected (if using)
@@ -306,7 +306,7 @@ Run through this checklist to ensure everything is working:
 ```bash
 # Start your day
 claude code /onboard
-claude code /daily-workflow
+claude code /daily
 
 # Claude will:
 # - Create today's note
@@ -326,7 +326,7 @@ claude code /push
 ### Weekly Review (30 minutes)
 ```bash
 # Sunday evening or Monday morning
-claude code /weekly-review
+claude code /weekly
 
 # Follow the guided review process
 ```
@@ -347,7 +347,7 @@ claude --version
 ls -la .claude/skills/
 
 # Verify a skill file exists
-cat .claude/skills/daily-workflow/SKILL.md
+cat .claude/skills/daily/SKILL.md
 ```
 
 ### Git Issues

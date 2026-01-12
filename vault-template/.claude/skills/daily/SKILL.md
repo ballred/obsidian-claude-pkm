@@ -1,5 +1,5 @@
 ---
-name: daily-workflow
+name: daily
 description: Create daily notes and manage morning, midday, and evening routines. Structure daily planning, task review, and end-of-day reflection. Use for daily productivity routines or when asked to create today's note.
 allowed-tools: Read, Write, Edit, Glob, Grep
 user-invocable: true
@@ -11,11 +11,11 @@ Creates daily notes and provides structured workflows for morning planning, midd
 
 ## Usage
 
-Invoke with `/daily-workflow` or ask Claude to create today's note or help with daily routines.
+Invoke with `/daily` or ask Claude to create today's note or help with daily routines.
 
 ### Create Today's Note
 ```
-/daily-workflow
+/daily
 ```
 
 Or simply ask:
@@ -185,7 +185,7 @@ Daily Notes/2024/01/2024-01-15.md
 
 Works with:
 - `/push` - Commit end-of-day changes
-- `/weekly-review` - Weekly planning uses daily notes
+- `/weekly` - Weekly planning uses daily notes
 - `/onboard` - Load context before planning
 - Goal tracking skill - Align daily tasks to goals
 - Productivity Coach - Accountability for daily routines

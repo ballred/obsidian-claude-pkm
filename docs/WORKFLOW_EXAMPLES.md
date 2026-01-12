@@ -12,7 +12,7 @@ Real-world scenarios showing how to use your PKM system effectively throughout y
 claude code /onboard
 
 # Create today's daily note
-claude code /daily-workflow
+claude code /daily
 ```
 
 #### 6:05 AM - Review and Plan
@@ -83,7 +83,7 @@ claude code /push "Daily work complete - {{date}}"
 
 #### Step 1: Create Review (5 min)
 ```bash
-claude code /weekly-review
+claude code /weekly
 ```
 
 #### Step 2: Review Last Week (10 min)

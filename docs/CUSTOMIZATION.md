@@ -310,7 +310,7 @@ Invoke with `/meeting-notes` or ask Claude to create meeting notes.
 ### Modifying Existing Skills
 
 #### Daily Workflow for Different Schedules
-Edit `.claude/skills/daily-workflow/SKILL.md` to customize:
+Edit `.claude/skills/daily/SKILL.md` to customize:
 - Daily notes folder location
 - Template path
 - Date format preferences
@@ -713,8 +713,8 @@ user-invocable: true
 #### Included Skills
 | Skill | Invocation | Purpose |
 |-------|------------|---------|
-| `daily-workflow` | `/daily-workflow` | Create daily notes, morning/midday/evening routines |
-| `weekly-review` | `/weekly-review` | Run weekly review, reflect and plan |
+| `daily` | `/daily` | Create daily notes, morning/midday/evening routines |
+| `weekly` | `/weekly` | Run weekly review, reflect and plan |
 | `push` | `/push` | Git commit and push |
 | `onboard` | `/onboard` | Load vault context |
 | `goal-tracking` | (auto) | Track goal progress |

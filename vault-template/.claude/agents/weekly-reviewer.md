@@ -82,6 +82,6 @@ When Productivity Coach output style is active, include probing questions:
 ## Integration
 
 Works well with:
-- `/weekly-review` skill for structured workflow
+- `/weekly` skill for structured workflow
 - Goal Aligner agent for deep analysis
 - Note Organizer agent for archiving old notes

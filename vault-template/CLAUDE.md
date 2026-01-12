@@ -32,8 +32,8 @@ Skills are invoked with `/skill-name` or automatically by Claude when relevant.
 
 | Skill | Invocation | Purpose |
 |-------|------------|---------|
-| `daily-workflow` | `/daily-workflow` | Create daily notes, morning/midday/evening routines |
-| `weekly-review` | `/weekly-review` | Run weekly review, reflect and plan |
+| `daily` | `/daily` | Create daily notes, morning/midday/evening routines |
+| `weekly` | `/weekly` | Run weekly review, reflect and plan |
 | `push` | `/push` | Commit and push changes to Git |
 | `onboard` | `/onboard` | Load full vault context |
 | `goal-tracking` | (auto) | Track progress across goal cascade |
@@ -59,7 +59,7 @@ Skills are invoked with `/skill-name` or automatically by Claude when relevant.
 ## Daily Workflow
 
 ### Morning (5 min)
-1. Run `/daily-workflow` to create today's note
+1. Run `/daily` to create today's note
 2. Identify ONE main focus
 3. Review yesterday's incomplete tasks
 4. Set time blocks
@@ -70,7 +70,7 @@ Skills are invoked with `/skill-name` or automatically by Claude when relevant.
 3. Run `/push` to save changes
 
 ### Weekly (30 min - Sunday)
-1. Run `/weekly-review` for guided review
+1. Run `/weekly` for guided review
 2. Calculate goal progress
 3. Plan next week's focus
 4. Archive old notes

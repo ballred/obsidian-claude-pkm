@@ -1,5 +1,5 @@
 ---
-name: weekly-review
+name: weekly
 description: Facilitate weekly review process with reflection, goal alignment, and planning. Create review notes, analyze past week, plan next week. Use on Sundays or whenever doing weekly planning.
 allowed-tools: Read, Write, Edit, Glob, Grep
 user-invocable: true
@@ -170,4 +170,4 @@ Works with:
 - `/push` - Commit after completing review
 - `/onboard` - Load context for informed review
 - Goal tracking skill - Progress calculations
-- Daily workflow skill - Plan next week's routines
+- `/daily` skill - Plan next week's routines

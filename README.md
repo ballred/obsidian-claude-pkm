@@ -18,7 +18,7 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 - **🎨 Fully Customizable** - Adapt templates and structure to your needs
 
 ### AI-Powered (v2.1)
-- **⚡ Unified Skills** - Skills and slash commands merged (`/daily-workflow`, `/weekly-review`, `/push`, `/onboard`)
+- **⚡ Unified Skills** - Skills and slash commands merged (`/daily`, `/weekly`, `/push`, `/onboard`)
 - **🪝 Hooks** - Auto-commit on save, session initialization
 - **🤖 Custom Agents** - Note organizer, weekly reviewer, goal aligner, inbox processor
 - **📏 Modular Rules** - Path-specific conventions for markdown, productivity, projects
@@ -86,8 +86,8 @@ Your Vault/
 │   │   ├── goal-aligner.md
 │   │   └── inbox-processor.md
 │   ├── skills/                  # Unified skills (invoke with /skill-name)
-│   │   ├── daily-workflow/      # /daily-workflow - Create daily notes, routines
-│   │   ├── weekly-review/       # /weekly-review - Weekly review process
+│   │   ├── daily/               # /daily - Create daily notes, routines
+│   │   ├── weekly/              # /weekly - Weekly review process
 │   │   ├── push/                # /push - Git commit and push
 │   │   ├── onboard/             # /onboard - Load vault context
 │   │   ├── goal-tracking/       # Auto: Track goal progress
