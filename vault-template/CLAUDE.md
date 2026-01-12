@@ -26,14 +26,18 @@ See @Goals/2. Monthly Goals.md for this month's priorities.
 **Status:** `#active`, `#waiting`, `#completed`, `#archived`
 **Context:** `#work`, `#personal`, `#health`, `#learning`, `#family`
 
-## Available Commands
+## Available Skills
 
-| Command | Purpose |
-|---------|---------|
-| `/daily` | Create today's daily note from template |
-| `/weekly` | Run weekly review process |
-| `/push` | Commit and push changes to Git |
-| `/onboard` | Load full vault context |
+Skills are invoked with `/skill-name` or automatically by Claude when relevant.
+
+| Skill | Invocation | Purpose |
+|-------|------------|---------|
+| `daily` | `/daily` | Create daily notes, morning/midday/evening routines |
+| `weekly` | `/weekly` | Run weekly review, reflect and plan |
+| `push` | `/push` | Commit and push changes to Git |
+| `onboard` | `/onboard` | Load full vault context |
+| `goal-tracking` | (auto) | Track progress across goal cascade |
+| `obsidian-vault-ops` | (auto) | Read/write vault files, manage wiki-links |
 
 ## Available Agents
 
@@ -43,12 +47,6 @@ See @Goals/2. Monthly Goals.md for this month's priorities.
 | `weekly-reviewer` | Facilitate weekly review aligned with goals |
 | `goal-aligner` | Check daily/weekly alignment with long-term goals |
 | `inbox-processor` | GTD-style inbox processing |
-
-## Available Skills
-
-- **obsidian-vault-ops** - Read/write vault files, manage wiki-links
-- **goal-tracking** - Track progress across goal cascade
-- **daily-workflow** - Morning/midday/evening routines
 
 ## Output Styles
 
@@ -92,5 +90,5 @@ See `CLAUDE.local.md.template` for format.
 ---
 
 *See @.claude/rules/ for detailed conventions*
-*Last Updated: 2024-12-19*
-*System Version: 2.0*
+*Last Updated: 2026-01-10*
+*System Version: 2.1 (Unified Skills)*

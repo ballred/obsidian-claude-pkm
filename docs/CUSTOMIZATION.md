@@ -7,7 +7,7 @@ Make this PKM system truly yours. This guide covers everything from simple tweak
 2. [Template Modifications](#template-modifications)
 3. [Folder Structure](#folder-structure)
 4. [Tag System](#tag-system)
-5. [Claude Commands](#claude-commands)
+5. [Skills (Unified Pattern)](#skills-unified-pattern)
 6. [Output Styles](#output-styles)
 7. [Workflow Automation](#workflow-automation)
 8. [Theme and Appearance](#theme-and-appearance)
@@ -249,19 +249,30 @@ Use multiple tags for powerful filtering:
 #work #priority/high #energy/high #context/office
 ```
 
-## Claude Commands
+## Skills (Unified Pattern)
 
-### Creating Custom Commands
+In Claude Code v2.1+, skills and slash commands are unified. All capabilities are now skills that can be invoked with `/skill-name` or auto-discovered by Claude.
 
-#### Example: Book Notes Command
-Create `.claude/commands/book.md`:
+### Creating Custom Skills
+
+Create a new skill directory with a `SKILL.md` file:
+
+#### Example: Book Notes Skill
+Create `.claude/skills/book-notes/SKILL.md`:
 ```markdown
-# Book Notes Creator
+---
+name: book-notes
+description: Create book notes with metadata. Use when starting a new book or organizing reading notes.
+allowed-tools: Read, Write, Edit, Glob
+user-invocable: true
+---
+
+# Book Notes Skill
 
 Creates a new book note with metadata and structure.
 
 ## Usage
-claude code /book "Book Title" "Author"
+Invoke with `/book-notes` or ask Claude to create a book note.
 
 ## What it does
 1. Creates note in Resources/Books/
@@ -270,17 +281,24 @@ claude code /book "Book Title" "Author"
 4. Links to reading list
 ```
 
-#### Example: Meeting Notes Command
-Create `.claude/commands/meeting.md`:
+#### Example: Meeting Notes Skill
+Create `.claude/skills/meeting-notes/SKILL.md`:
 ```markdown
-# Meeting Notes
+---
+name: meeting-notes
+description: Create formatted meeting notes with action items. Use before or after meetings.
+allowed-tools: Read, Write, Edit
+user-invocable: true
+---
+
+# Meeting Notes Skill
 
 Creates formatted meeting notes with action items.
 
 ## Usage
-claude code /meeting "Meeting Title"
+Invoke with `/meeting-notes` or ask Claude to create meeting notes.
 
-## Template
+## Template Structure
 - Date/Time
 - Attendees
 - Agenda
@@ -289,20 +307,14 @@ claude code /meeting "Meeting Title"
 - Follow-up
 ```
 
-### Modifying Existing Commands
+### Modifying Existing Skills
 
-#### Daily Command for Different Schedules
-Edit `.claude/commands/daily.md`:
-```javascript
-// For night shift workers
-const DAILY_NOTES_TIME = "18:00"; // 6 PM start
-
-// For early risers
-const MORNING_ROUTINE_START = "05:00";
-
-// For parents
-const INCLUDE_FAMILY_SECTION = true;
-```
+#### Daily Workflow for Different Schedules
+Edit `.claude/skills/daily/SKILL.md` to customize:
+- Daily notes folder location
+- Template path
+- Date format preferences
+- Time block structure
 
 ## Output Styles
 
@@ -396,15 +408,22 @@ Edit `.claude/output-styles/coach.md` to adjust the coaching approach:
 
 ### Morning Routine Automation
 
-Create `.claude/commands/morning.md`:
+Create `.claude/skills/morning-routine/SKILL.md`:
 ```markdown
-# Morning Routine
+---
+name: morning-routine
+description: Execute complete morning workflow with daily note, task review, and planning.
+allowed-tools: Read, Write, Edit, Glob
+user-invocable: true
+---
+
+# Morning Routine Skill
 
 Executes complete morning workflow.
 
 ## Steps
 1. Create daily note
-2. Review yesterday's uncomplete tasks
+2. Review yesterday's incomplete tasks
 3. Check calendar for today
 4. Pull priority from weekly goals
 5. Set time blocks
@@ -413,9 +432,16 @@ Executes complete morning workflow.
 
 ### End-of-Day Automation
 
-Create `.claude/commands/evening.md`:
+Create `.claude/skills/evening-shutdown/SKILL.md`:
 ```markdown
-# Evening Shutdown
+---
+name: evening-shutdown
+description: Complete end-of-day routine with task review, reflection, and git commit.
+allowed-tools: Read, Write, Edit, Bash
+user-invocable: true
+---
+
+# Evening Shutdown Skill
 
 Complete end-of-day routine.
 
@@ -430,9 +456,16 @@ Complete end-of-day routine.
 
 ### Project Kickoff Automation
 
-Create `.claude/commands/kickoff.md`:
+Create `.claude/skills/project-kickoff/SKILL.md`:
 ```markdown
-# Project Kickoff
+---
+name: project-kickoff
+description: Initialize new project with standard structure, CLAUDE.md, and planning docs.
+allowed-tools: Write, Edit, Glob, Bash
+user-invocable: true
+---
+
+# Project Kickoff Skill
 
 Initialize new project with structure.
 
@@ -599,7 +632,7 @@ Use Tasker or Automate for:
 - [ ] [Task from external system]
 ```
 
-## v2.0 Features: Hooks, Agents, Skills & Rules
+## v2.1 Features: Unified Skills, Hooks, Agents & Rules
 
 ### Hooks (Automatic Behaviors)
 
@@ -658,9 +691,9 @@ model: sonnet
 - `goal-aligner` - Goal-activity alignment analysis
 - `inbox-processor` - GTD-style inbox processing
 
-### Skills (Auto-Discovered Capabilities)
+### Skills (Unified with Slash Commands)
 
-Skills are capabilities Claude discovers and uses automatically. Located in `.claude/skills/`:
+Skills and slash commands are now unified in Claude Code v2.1+. All skills are located in `.claude/skills/`:
 
 #### Creating a Custom Skill
 Create `.claude/skills/my-skill/SKILL.md`:
@@ -669,6 +702,7 @@ Create `.claude/skills/my-skill/SKILL.md`:
 name: my-skill
 description: What this skill does. Use for [specific situations].
 allowed-tools: Read, Write, Edit
+user-invocable: true
 ---
 
 # Skill Instructions
@@ -677,9 +711,14 @@ allowed-tools: Read, Write, Edit
 ```
 
 #### Included Skills
-- `obsidian-vault-ops` - Vault file operations
-- `goal-tracking` - Goal cascade management
-- `daily-workflow` - Daily routine structure
+| Skill | Invocation | Purpose |
+|-------|------------|---------|
+| `daily` | `/daily` | Create daily notes, morning/midday/evening routines |
+| `weekly` | `/weekly` | Run weekly review, reflect and plan |
+| `push` | `/push` | Git commit and push |
+| `onboard` | `/onboard` | Load vault context |
+| `goal-tracking` | (auto) | Track goal progress |
+| `obsidian-vault-ops` | (auto) | Vault file operations |
 
 ### Modular Rules
 

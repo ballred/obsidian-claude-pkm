@@ -68,6 +68,6 @@ Wait for user confirmation before making changes.
 ## Integration
 
 Works well with:
-- `/onboard` command for initial context
+- `/onboard` skill for initial context
 - Productivity Coach output style for guidance
 - Weekly review workflow for regular maintenance

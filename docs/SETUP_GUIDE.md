@@ -126,18 +126,18 @@ claude init
 claude "Hello, I'm setting up my PKM system"
 ```
 
-### Step 2: Set Up Commands
+### Step 2: Verify Skills
 
 ```bash
-# The commands should already be in .claude/commands/
+# Skills are in .claude/skills/ with each skill in its own directory
 # Verify they exist:
-ls .claude/commands/
+ls .claude/skills/
 
 # You should see:
-# daily.md  weekly.md  push.md  onboard.md
+# daily/  weekly/  push/  onboard/  goal-tracking/  obsidian-vault-ops/
 ```
 
-### Step 3: Test Commands
+### Step 3: Test Skills
 
 ```bash
 # Load your context
@@ -293,8 +293,8 @@ Run through this checklist to ensure everything is working:
 
 - [ ] Obsidian opens your vault without errors
 - [ ] CLAUDE.md has your personalized content
-- [ ] `/daily` command creates today's note
-- [ ] `/onboard` command loads your context
+- [ ] `/daily` skill creates today's note
+- [ ] `/onboard` skill loads your context
 - [ ] Git commits work locally
 - [ ] GitHub remote is connected (if using)
 - [ ] Goals files have your objectives
@@ -338,16 +338,16 @@ claude code /weekly
 - Ensure path has no special characters
 - Try creating fresh vault and copying files
 
-### Claude Commands Not Working
+### Skills Not Working
 ```bash
 # Verify Claude Code installation
 claude --version
 
-# Check command files exist
-ls -la .claude/commands/
+# Check skill directories exist
+ls -la .claude/skills/
 
-# Try running directly
-claude code < .claude/commands/daily.md
+# Verify a skill file exists
+cat .claude/skills/daily/SKILL.md
 ```
 
 ### Git Issues

@@ -113,5 +113,5 @@ Confirm? (y/n/modify)
 
 Works well with:
 - Note Organizer agent for vault maintenance
-- `/daily` command for routing to today's note
+- `/daily` skill for routing to today's note
 - Weekly review for processing backlog
