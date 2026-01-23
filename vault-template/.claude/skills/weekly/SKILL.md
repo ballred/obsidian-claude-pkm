@@ -1,7 +1,7 @@
 ---
 name: weekly
 description: Facilitate weekly review process with reflection, goal alignment, and planning. Create review notes, analyze past week, plan next week. Use on Sundays or whenever doing weekly planning.
-allowed-tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList
+allowed-tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList, TaskGet
 user-invocable: true
 ---
 
@@ -163,28 +163,42 @@ Calculate habit success rates from daily notes:
 - Communicate changes
 - Celebrate wins
 
-## Progress Tracking
+## Task-Based Progress Tracking
 
-The weekly skill uses session tasks to show progress through the 3-phase review:
+The weekly skill uses session tasks to show progress through the 3-phase review.
 
-### Phase Progress with Dependencies
+### Phase Tasks
+
+Create tasks at skill start:
+
 ```
-[Spinner] Phase 1: Collecting daily notes...
-[Spinner] Phase 1: Extracting wins and challenges...
-[Done] Phase 1: Collect complete
+TaskCreate:
+  subject: "Phase 1: Collect"
+  description: "Gather daily notes from past week, extract wins and challenges"
+  activeForm: "Collecting daily notes and extracting highlights..."
 
-[Spinner] Phase 2: Calculating goal progress...
-[Spinner] Phase 2: Analyzing alignment gaps...
-[Done] Phase 2: Reflect complete
+TaskCreate:
+  subject: "Phase 2: Reflect"
+  description: "Calculate goal progress, analyze alignment gaps"
+  activeForm: "Calculating goal progress and alignment..."
 
-[Spinner] Phase 3: Identifying ONE Big Thing...
-[Spinner] Phase 3: Planning daily focus areas...
-[Done] Phase 3: Plan complete
-
-Weekly review complete (3/3 phases)
+TaskCreate:
+  subject: "Phase 3: Plan"
+  description: "Identify ONE Big Thing, plan daily focus areas for next week"
+  activeForm: "Planning next week's focus..."
 ```
 
-Tasks use dependencies to ensure phases run in order—Reflect is blocked until Collect completes, and Plan is blocked until Reflect completes. This provides visibility into the 30-minute review process.
+### Dependencies
+
+Phases must run in order:
+```
+TaskUpdate: "Phase 2: Reflect", addBlockedBy: [phase-1-collect-id]
+TaskUpdate: "Phase 3: Plan", addBlockedBy: [phase-2-reflect-id]
+```
+
+Reflect is blocked until Collect completes. Plan is blocked until Reflect completes. This provides visibility into the 30-minute review process.
+
+Mark each task `in_progress` when starting, `completed` when done using TaskUpdate.
 
 Task tools are session-scoped and don't persist between Claude sessions—your actual weekly review content is saved in the review note.
 

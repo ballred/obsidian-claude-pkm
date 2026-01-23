@@ -1,7 +1,7 @@
 ---
 name: daily
 description: Create daily notes and manage morning, midday, and evening routines. Structure daily planning, task review, and end-of-day reflection. Use for daily productivity routines or when asked to create today's note.
-allowed-tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList
+allowed-tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList, TaskGet
 user-invocable: true
 ---
 
@@ -181,26 +181,65 @@ Organize daily notes by month/year:
 Daily Notes/2024/01/2024-01-15.md
 ```
 
-## Progress Tracking
+## Task-Based Progress Tracking
 
-The daily skill uses session tasks to show progress during multi-step routines:
+The daily skill uses session tasks to show progress during multi-step routines.
 
-### Morning Routine Progress
+### Morning Routine Tasks
+
+Create tasks at skill start:
+
 ```
-[Spinner] Creating daily note...
-[Spinner] Pulling incomplete tasks from yesterday...
-[Spinner] Surfacing relevant goals...
-[Spinner] Setting time blocks...
-[Done] Morning routine complete (4/4 tasks)
+TaskCreate:
+  subject: "Create daily note"
+  description: "Create or open today's daily note from template"
+  activeForm: "Creating daily note..."
+
+TaskCreate:
+  subject: "Pull incomplete tasks"
+  description: "Carry forward uncompleted tasks from yesterday"
+  activeForm: "Pulling incomplete tasks from yesterday..."
+
+TaskCreate:
+  subject: "Surface relevant goals"
+  description: "Review weekly/monthly goals for today's priority"
+  activeForm: "Surfacing relevant goals..."
+
+TaskCreate:
+  subject: "Set time blocks"
+  description: "Establish time blocks based on energy and priorities"
+  activeForm: "Setting time blocks..."
 ```
 
-### Evening Shutdown Progress
+### Dependencies
+
+Morning routine tasks run sequentially:
 ```
-[Spinner] Updating task statuses...
-[Spinner] Generating reflection prompts...
-[Spinner] Preparing tomorrow's preview...
-[Done] Evening shutdown complete (3/3 tasks)
+TaskUpdate: "Pull incomplete tasks", addBlockedBy: [create-daily-note-id]
+TaskUpdate: "Surface relevant goals", addBlockedBy: [pull-incomplete-tasks-id]
+TaskUpdate: "Set time blocks", addBlockedBy: [surface-relevant-goals-id]
 ```
+
+### Evening Shutdown Tasks
+
+```
+TaskCreate:
+  subject: "Update task statuses"
+  description: "Mark completed tasks, note blockers"
+  activeForm: "Updating task statuses..."
+
+TaskCreate:
+  subject: "Generate reflection prompts"
+  description: "Prompt for wins, challenges, learnings, gratitude"
+  activeForm: "Generating reflection prompts..."
+
+TaskCreate:
+  subject: "Prepare tomorrow's preview"
+  description: "Identify tomorrow's priority and move incomplete tasks"
+  activeForm: "Preparing tomorrow's preview..."
+```
+
+Mark each task `in_progress` when starting, `completed` when done using TaskUpdate.
 
 Task tools provide visibility into what's happening during longer operations. Tasks are session-scoped and don't persist between Claude sessions—your actual work items remain in your daily note markdown checkboxes.
 
