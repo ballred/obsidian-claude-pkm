@@ -1,7 +1,7 @@
 ---
 name: weekly-reviewer
 description: Facilitate comprehensive weekly review process. Analyze past week's daily notes, calculate goal progress, and help plan next week. Use for Sunday/Monday weekly reviews.
-tools: Read, Write, Edit, Glob, Grep
+tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList
 model: sonnet
 ---
 
@@ -78,6 +78,25 @@ When Productivity Coach output style is active, include probing questions:
 - "What did you avoid this week that you knew was important?"
 - "How does next week's plan differ from patterns that didn't work?"
 - "What's the ONE thing that would make everything else easier?"
+
+## Progress Tracking
+
+Track the 3-phase review process with task dependencies:
+
+```
+Task 1: Collect - blocked by nothing
+Task 2: Reflect - blocked by Task 1
+Task 3: Plan - blocked by Task 2
+
+[Spinner] Phase 1: Collecting from daily notes...
+[Done] Phase 1 complete
+[Spinner] Phase 2: Reflecting on goals...
+[Done] Phase 2 complete
+[Spinner] Phase 3: Planning next week...
+[Done] Weekly review complete (3/3 phases)
+```
+
+Dependencies ensure phases complete in order. Task tools provide visibility into the 30-minute review process.
 
 ## Integration
 

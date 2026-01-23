@@ -1,7 +1,7 @@
 ---
 name: note-organizer
 description: Organize and restructure vault notes. Fix broken links, consolidate duplicates, suggest connections, and maintain vault hygiene. Use when managing vault organization or cleaning up notes.
-tools: Read, Write, Edit, Glob, Grep, Bash
+tools: Read, Write, Edit, Glob, Grep, Bash, TaskCreate, TaskUpdate, TaskList
 model: sonnet
 ---
 
@@ -64,6 +64,27 @@ Always provide a summary of proposed changes before executing:
 ```
 
 Wait for user confirmation before making changes.
+
+## Progress Tracking
+
+Track proposed changes as tasks before execution:
+
+```
+[Spinner] Scanning vault structure...
+[Spinner] Identifying orphan notes...
+[Spinner] Checking for broken links...
+[Spinner] Auditing tag consistency...
+[Done] Analysis complete (4/4 checks)
+
+Proposed changes:
+- Task: Move 3 files to Projects/
+- Task: Fix 2 broken links
+- Task: Consolidate 5 duplicate tags
+
+[Awaiting confirmation]
+```
+
+Each proposed change becomes a task, giving visibility into what will be modified before confirmation.
 
 ## Integration
 

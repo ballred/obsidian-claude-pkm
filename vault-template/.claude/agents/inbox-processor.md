@@ -1,7 +1,7 @@
 ---
 name: inbox-processor
 description: Process inbox items using GTD principles. Categorize, clarify, and organize captured notes into actionable items. Use for inbox zero and capture processing.
-tools: Read, Write, Edit, Glob, Bash
+tools: Read, Write, Edit, Glob, Bash, TaskCreate, TaskUpdate, TaskList
 model: sonnet
 ---
 
@@ -108,6 +108,19 @@ Confirm? (y/n/modify)
 3. Create projects when 2+ actions are needed
 4. Link to relevant goals when possible
 5. Add context tags for filtering (#work, #personal, etc.)
+
+## Progress Tracking
+
+When processing multiple inbox items, create a task for each item to show batch progress:
+
+```
+[Spinner] Processing item 1/5: Meeting notes...
+[Spinner] Processing item 2/5: Book recommendation...
+[Spinner] Processing item 3/5: Project idea...
+[Done] Inbox processing complete (5/5 items)
+```
+
+Task tools provide visibility into batch processing. Each inbox item becomes a session task that shows status as it's categorized and filed.
 
 ## Integration
 

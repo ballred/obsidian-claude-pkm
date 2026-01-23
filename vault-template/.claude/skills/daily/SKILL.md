@@ -1,7 +1,7 @@
 ---
 name: daily
 description: Create daily notes and manage morning, midday, and evening routines. Structure daily planning, task review, and end-of-day reflection. Use for daily productivity routines or when asked to create today's note.
-allowed-tools: Read, Write, Edit, Glob, Grep
+allowed-tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList
 user-invocable: true
 ---
 
@@ -180,6 +180,29 @@ Organize daily notes by month/year:
 ```
 Daily Notes/2024/01/2024-01-15.md
 ```
+
+## Progress Tracking
+
+The daily skill uses session tasks to show progress during multi-step routines:
+
+### Morning Routine Progress
+```
+[Spinner] Creating daily note...
+[Spinner] Pulling incomplete tasks from yesterday...
+[Spinner] Surfacing relevant goals...
+[Spinner] Setting time blocks...
+[Done] Morning routine complete (4/4 tasks)
+```
+
+### Evening Shutdown Progress
+```
+[Spinner] Updating task statuses...
+[Spinner] Generating reflection prompts...
+[Spinner] Preparing tomorrow's preview...
+[Done] Evening shutdown complete (3/3 tasks)
+```
+
+Task tools provide visibility into what's happening during longer operations. Tasks are session-scoped and don't persist between Claude sessions—your actual work items remain in your daily note markdown checkboxes.
 
 ## Integration
 

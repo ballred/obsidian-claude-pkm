@@ -1,7 +1,7 @@
 ---
 name: goal-tracking
 description: Track progress toward 3-year, yearly, monthly, and weekly goals. Calculate completion percentages, surface stalled goals, connect daily tasks to objectives. Use for goal reviews and progress tracking.
-allowed-tools: Read, Grep, Glob, Edit
+allowed-tools: Read, Grep, Glob, Edit, TaskCreate, TaskUpdate, TaskList
 ---
 
 # Goal Tracking Skill
@@ -118,6 +118,23 @@ When adding tasks to daily notes:
 1. [Stalled goal needs attention]
 2. [Nearly complete goal - finish it]
 ```
+
+## Progress Tracking
+
+The goal tracking skill uses session tasks when generating comprehensive progress reports:
+
+### Progress Report Generation
+```
+[Spinner] Reading three-year goals...
+[Spinner] Reading yearly goals...
+[Spinner] Reading monthly goals...
+[Spinner] Scanning recent daily notes...
+[Spinner] Calculating completion percentages...
+[Spinner] Identifying stalled goals...
+[Done] Goal progress report complete (6/6 steps)
+```
+
+This provides visibility when analyzing the full goal cascade across multiple files. Task tools are session-scoped and don't persist—your actual goal progress is tracked through markdown checkboxes and percentages in your goal files.
 
 ## Integration Points
 

@@ -24,6 +24,7 @@ A complete personal knowledge management system that combines Obsidian's powerfu
 - **📏 Modular Rules** - Path-specific conventions for markdown, productivity, projects
 - **🧠 Output Styles** - Productivity Coach for accountability
 - **📊 Status Line** - Vault stats in terminal (note count, inbox, uncommitted changes)
+- **👁️ Progress Visibility** - See spinner updates during multi-step operations like morning routines
 
 ## 🚀 Quick Start
 

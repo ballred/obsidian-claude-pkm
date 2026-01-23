@@ -1,7 +1,7 @@
 ---
 name: weekly
 description: Facilitate weekly review process with reflection, goal alignment, and planning. Create review notes, analyze past week, plan next week. Use on Sundays or whenever doing weekly planning.
-allowed-tools: Read, Write, Edit, Glob, Grep
+allowed-tools: Read, Write, Edit, Glob, Grep, TaskCreate, TaskUpdate, TaskList
 user-invocable: true
 ---
 
@@ -162,6 +162,31 @@ Calculate habit success rates from daily notes:
 - Update external systems
 - Communicate changes
 - Celebrate wins
+
+## Progress Tracking
+
+The weekly skill uses session tasks to show progress through the 3-phase review:
+
+### Phase Progress with Dependencies
+```
+[Spinner] Phase 1: Collecting daily notes...
+[Spinner] Phase 1: Extracting wins and challenges...
+[Done] Phase 1: Collect complete
+
+[Spinner] Phase 2: Calculating goal progress...
+[Spinner] Phase 2: Analyzing alignment gaps...
+[Done] Phase 2: Reflect complete
+
+[Spinner] Phase 3: Identifying ONE Big Thing...
+[Spinner] Phase 3: Planning daily focus areas...
+[Done] Phase 3: Plan complete
+
+Weekly review complete (3/3 phases)
+```
+
+Tasks use dependencies to ensure phases run in order—Reflect is blocked until Collect completes, and Plan is blocked until Reflect completes. This provides visibility into the 30-minute review process.
+
+Task tools are session-scoped and don't persist between Claude sessions—your actual weekly review content is saved in the review note.
 
 ## Integration
 

@@ -1,7 +1,7 @@
 ---
 name: goal-aligner
 description: Analyze alignment between daily activities and long-term goals. Identify gaps, over/under-investment, and suggest rebalancing. Use for goal audits and priority checks.
-tools: Read, Grep, Glob
+tools: Read, Grep, Glob, TaskCreate, TaskUpdate, TaskList
 model: sonnet
 ---
 
@@ -81,6 +81,22 @@ When analyzing, surface these insights:
 - "Your stated #1 priority hasn't appeared in daily tasks this week."
 - "You're spending 3x more time on [X] than [Y], but [Y] is ranked higher."
 - "This goal has been 'in progress' for 6 weeks with no measurable advancement."
+
+## Progress Tracking
+
+Track multi-file analysis with session tasks:
+
+```
+[Spinner] Reading 3-year goals...
+[Spinner] Reading yearly goals...
+[Spinner] Reading monthly goals...
+[Spinner] Scanning 7 days of daily notes...
+[Spinner] Analyzing activity patterns...
+[Spinner] Calculating alignment score...
+[Done] Goal alignment analysis complete (6/6 steps)
+```
+
+Task tools provide visibility when analyzing the full goal cascade across multiple files.
 
 ## Integration
 
