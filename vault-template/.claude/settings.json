@@ -51,6 +51,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": ".claude/hooks/frontmatter-validator.sh",
+            "timeout": 5
+          },
+          {
+            "type": "command",
             "command": ".claude/hooks/auto-commit.sh \"$TOOL_INPUT_FILE_PATH\""
           }
         ]
