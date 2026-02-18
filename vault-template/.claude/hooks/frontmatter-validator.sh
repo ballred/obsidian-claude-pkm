@@ -1,6 +1,6 @@
 #!/bin/bash
-# Frontmatter validation hook (PostToolUse: Edit|Write)
-# Checks that markdown files have required frontmatter fields: date, tags, status
+# Frontmatter validation hook (PostToolUse: Write|Edit)
+# Checks that markdown files have YAML frontmatter delimiters (---)
 # Non-blocking — warns but does not prevent the operation (exit 0)
 
 # Read tool use JSON from stdin
@@ -30,23 +30,10 @@ esac
 # Check file exists
 [ -f "$FILE_PATH" ] || exit 0
 
-# Extract frontmatter (between first two --- lines)
-FRONTMATTER=$(awk '/^---$/{n++; next} n==1{print} n>=2{exit}' "$FILE_PATH")
-[ -z "$FRONTMATTER" ] && {
+# Check for frontmatter delimiters (opening and closing ---)
+DELIMITER_COUNT=$(grep -c '^---$' "$FILE_PATH")
+if [ "$DELIMITER_COUNT" -lt 2 ]; then
     echo "⚠️  Frontmatter missing: $BASENAME has no YAML frontmatter (---)" >&2
-    exit 0
-}
-
-# Check required fields
-MISSING=""
-
-echo "$FRONTMATTER" | grep -q "^date:" || MISSING="${MISSING}date, "
-echo "$FRONTMATTER" | grep -q "^tags:" || MISSING="${MISSING}tags, "
-echo "$FRONTMATTER" | grep -q "^status:" || MISSING="${MISSING}status, "
-
-if [ -n "$MISSING" ]; then
-    MISSING="${MISSING%, }"
-    echo "⚠️  Frontmatter incomplete: $BASENAME is missing: $MISSING" >&2
 fi
 
 # Always exit 0 — this is a warning, not a blocker
