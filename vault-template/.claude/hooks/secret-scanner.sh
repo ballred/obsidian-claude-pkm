@@ -1,13 +1,15 @@
 #!/bin/bash
-# Secret detection hook (PreToolUse: Edit|Write)
+# Secret detection hook (PreToolUse: Write|Edit)
 # Scans file content for API keys, tokens, and private keys before allowing writes
-# BLOCKING — prevents write if credentials are detected (exit 2 with JSON decision)
+# BLOCKING — prevents write if credentials are detected (JSON block decision on stdout)
+#
+# Requires: jq (pre-installed on macOS and most Linux distros)
 
 # Read tool use JSON from stdin
 INPUT=$(cat)
 
 # Extract file path from tool input
-FILE_PATH=$(echo "$INPUT" | grep -o '"file_path"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"file_path"[[:space:]]*:[[:space:]]*"//;s/"$//')
+FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
 [ -z "$FILE_PATH" ] && exit 0
 
 # Only scan markdown files
@@ -18,10 +20,7 @@ esac
 
 # Extract the new content being written
 # For Write: tool_input.content; for Edit: tool_input.new_string
-CONTENT=$(echo "$INPUT" | grep -o '"content"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"content"[[:space:]]*:[[:space:]]*"//;s/"$//')
-if [ -z "$CONTENT" ]; then
-    CONTENT=$(echo "$INPUT" | grep -o '"new_string"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | sed 's/.*"new_string"[[:space:]]*:[[:space:]]*"//;s/"$//')
-fi
+CONTENT=$(echo "$INPUT" | jq -r '.tool_input.content // .tool_input.new_string // empty')
 [ -z "$CONTENT" ] && exit 0
 
 # Check for secret patterns
